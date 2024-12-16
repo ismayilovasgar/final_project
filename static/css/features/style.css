@@ -115,7 +115,7 @@
   padding: 16px 24px;
   border-radius: 90px;
   background-color: var(--Primary-1);
-  color: var(--Neutrals-8);
+  /* color: var(--Neutrals-8); */
   text-align: center;
   margin-bottom: 20px;
 }

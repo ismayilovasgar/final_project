@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Class Programs{% endblock title %}
+
+{% comment %} {% block custom_favicon %}{% endblock custom_favicon %} {% endcomment %}
+
+
+{% block swiper_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock swiper_css %}
+
+
+{% block custom_css %} 
+<link rel="stylesheet" href="{% static 'css/class_01/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/class_01/responsive.css' %}">
+{% endblock custom_css %}
+
+
+{% comment %} *--- Content ---* {% endcomment %}
+{% block content %}
+
+
+
+  {% comment %}? <!-- ? breadcrumb Start --> {% endcomment %}
+  <section class="breadcrumb lightmode">
+    <div class="container">
+      <div class="breadcrumbWrap">
+        <h2 class="breadcrumbTitle">Find a class to achieve your goals</h2>
+        <div class="breadcrumbInfo">
+          Build your perfect workout with our pro trainers
+        </div>
+        <ul class="breadcrumbList">
+          <li class="breadcrumbItem">
+            <a href="#" class="breadcrumbLink">Class</a>
+          </li>
+          <li class="breadcrumbItem">
+            <a href="#" class="breadcrumbLink">
+              <i class="fa-solid fa-angle-right fa-lg"></i>
+            </a>
+          </li>
+          <li class="breadcrumbItem">
+            <a href="#" class="breadcrumbLink">Program</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  {% comment %}! <!-- ! breadcrumb End --> {% endcomment %}
+
+  {% comment %}? <!-- ? catalog Start --> {% endcomment %}
+  <section class="catalog lightmode">
+    <div class="container">
+      <div class="catalogHead">
+        <div class="catalogTitle">Find a class that fit with you</div>
+        {% comment %} <form action="" class="catalogSearch" id="catalog_search" method="POST"> {% endcomment %}
+        <div class="catalogSearch" id="catalog_search" >
+          {% comment %} {% csrf_token %} {% endcomment %}
+          <input class="catalogInput" id="catalog_input" type="text" placeholder="Find a class" name="name_search">
+          <button type="submit" class="catalogResult">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        {% comment %} </form> {% endcomment %}
+
+      </div>
+
+      <div class="catalogWrap">
+        <div class="catalogTop">
+          <div class="nice-select select">
+            <input type="text" name="release" class="current" value="Newest" />
+            <div class="select_arrow">
+              <i class="fa-solid fa-angle-down"></i>
+            </div>
+            <ul class="list">
+              <li data-value="Newest" class="option selected">Newest</li>
+              <li data-value="Oldest" class="option">Oldest</li>
+            </ul>
+          </div>
+
+          <div class="catalogNav">
+            <ul>
+              {% for category in categories  %}
+                  <li class="cataloglink {{category.name }}">{{category.name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <button class="customFilter catalogFilter">
+            <div class="catalogText">Filter</div>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <button class="customFilter advancedFilter">
+            <div class="catalogText">Advanced Filter</div>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="catalogSorting">
+
+          <div class="catalogCell">
+            <div class="cataloglabel">Style</div>
+
+            <div class="select sorting">
+              <input type="text" name="style" class="current" value="{{styles|first}}" />
+              <div class="select_arrow">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+              <ul class="list">
+                {% for style in styles %}
+                 <li data-value="{{style.name}}" class="option selected">{{style.name}}</li>
+                 {% comment %} <li data-value="Mini Yoga" class="option">Mini Yoga</li> {% endcomment %}
+                {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+         
+          <div class="catalogCell">
+            <div class="cataloglabel">Time of Day</div>
+
+            <div class="select sorting">
+              <input type="text" name="timeofday" class="current" value="Morning" />
+              <div class="select_arrow">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+              <ul class="list">
+                {% for day in timeofdaies %}
+                 <li data-value="{{day.name}}" class="option selected">{{day.name}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+         
+          <div class="catalogCell">
+            <div class="cataloglabel">Difficluty</div>
+
+            <div class="select sorting">
+              <input type="text" name="difficluty" class="current" value="Beginner" />
+              <div class="select_arrow">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+              <ul class="list">
+
+                {% for level  in levels %}
+                 <li data-value="{{level.name}}" class="option selected">{{level.name}}</li>
+                {% endfor %}
+
+              </ul>
+            </div>
+
+          </div>
+         
+          <div class="catalogCell">
+            <div class="cataloglabel">Intensity</div>
+
+            <div class="select sorting">
+              <input type="text" name="intensity" class="current" value="Level 1" />
+              <div class="select_arrow">
+                <i class="fa-solid fa-angle-down"></i>
+              </div>
+              <ul class="list">
+                {% for intensity in intensities %}
+                <li data-value="{{intensity.name}}" class="option selected">{{intensity.name}}</li>
+               {% endfor %}
+              </ul>
+            </div>
+
+          </div>
+         
+        </div>
+      </div>
+
+      
+       {% comment %}?  card html {% endcomment %}       
+      <div class="catalogList">
+
+
+       
+     </div> 
+      {% comment %}!  card html {% endcomment %}
+
+      {% comment %} <div class="catalogBtn">
+        <button class="discoverMore">
+          <p>Discover more</p>
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </div> {% endcomment %}
+      <div class="notFounded hidden_msg">not founded available content .....</div>
+
+    </div>
+  </section>
+  {% comment %}! <!-- ! catalog End --> {% endcomment %}
+
+  {% comment %}? <!--? testimonials Start  --> {% endcomment %}
+  {% comment %} {% include "includes_partials/testimonials.html" %} {% endcomment %}
+
+  <section class="testimonials lightmode">
+    <div class="container">
+      <div class="wrap">
+
+        <div class="testmonialsItem">
+          <div class="testimonialsRow">
+            <div class="testimonialsCol">
+              <div class="testimonialsLogo">
+                <img src="{% static 'assets/images/pricing/testimonials/logo.png' %}" alt="" />
+              </div>
+              <div class="testimonialsComment">
+                “ Fitness Pro is the greatest fitness app. It's clear the
+                makers behind this thing use it every week, because it is so
+                perfect. “
+              </div>
+              <div class="testimonialsDetails">
+                <div class="detailsIcon">
+                  <img src="{% static 'assets/images/pricing/testimonials/details_icon.png' %}" alt="" />
+                </div>
+                <div class="descriptionInfo">
+
+                  <div class="detailsAuthor">Megane Schumm</div>
+                  <span class="detailsDivider"></span>
+                  <div class="detailsDescription">Legacy Data Coordinator</div>
+
+                </div>
+              </div>
+              <button class="btn readmore">Read full story</button>
+            </div>
+            <div class="testimonialsCol">
+              <div class="testimonialsPreview">
+                <img src="{% static 'assets/images/pricing/testimonials/preview.png' %}" alt="" />
+                <button class="play">
+                  <img src="{% static 'assets/images/pricing/testimonials/play.svg' %}" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testmonialsNav">
+          <div class="swiper">
+            <div class="testimonials-swiper">
+              <ul class="swiper-wrapper">
+
+
+                {% for trainer in trainers %}
+
+                  <li class="swiper-slide">
+                    <a href="{% url "class02" %}">
+                      <div class="testimonialsAvatar">
+                        <img src=" {{ trainer.image.url}}" alt="" />
+                      </div>
+                      <div class="testimonialsGroup">
+                        <div class="testmonialsName">{{ trainer.fullname }} </div>
+                        <div class="testmonialsPosition">{{ trainer.profession}}</div>
+                      </div>
+                    </a>
+                  </li>
+                
+                {% endfor %}
+
+  
+              </ul>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  {% comment %}! <!--! testimonials End  --> {% endcomment %}
+
+
+{% endblock content %}
+{% comment %} *--- Content ---* {% endcomment %}
+
+{% block swiper_js %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{% endblock swiper_js %}
+
+
+{% block custom_js %}
+    {% comment %} <script src="{% static 'js/class_01/class_01.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/class_01/class_01_new.js' %}"></script>
+{% endblock custom_js  %}

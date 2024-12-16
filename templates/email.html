@@ -1,0 +1,111 @@
+<!-- email_template.html -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="user_title_msg">Welcome to Our Service!</h1>
+        {% comment %} <p class="user_tag">Hi, dear </span> </p> {% endcomment %}
+        <p class="user_tag">Hi , dear <span>{{ name }}</span> </p>
+        <p>Thank you for joining our service. We’re excited to have you!</p>
+        {% comment %} <a class="button" href="{{ url }}">Get Started</a> {% endcomment %}
+    </div>
+
+    <div class="trainersList">
+        <div class="listWrap">
+
+            <a href="http://127.0.0.1:8000/class_02">
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img src="cid:image1" alt="">
+                    </div>
+                    <div class="trainerName">Baron Toy</div>
+                    <div class="trainerPosition">Yoga Master</div>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:8000/class_02">            
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img  src="cid:image2" alt="">
+                    </div>
+                    <div class="trainerName">Kacie Kiehn</div>
+                    <div class="trainerPosition">Personal Trainer</div>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:8000/class_02">            
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img src="cid:image3" alt="">
+                    </div>
+                    <div class="trainerName">Marcelino Hettinger</div>
+                    <div class="trainerPosition">Boxer</div>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:8000/class_02">            
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img src="cid:image4" alt="">
+                    </div>
+                    <div class="trainerName">Rosemarie Hintz</div>
+                    <div class="trainerPosition">Business Analytic</div>
+                </div>
+            </a>
+
+            <a href="http://127.0.0.1:8000/class_02">            
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img src="cid:image5" alt="">
+                    </div>
+                    <div class="trainerName">Syble Prohaska</div>
+                    <div class="trainerPosition">Business Analytic</div>
+                </div>
+            </a>
+
+
+            <a href="http://127.0.0.1:8000/class_02">            
+                <div class="trainerItem">
+                    <div class="profile">
+                        <img src="cid:image6" alt="">
+                    </div>
+                    <div class="trainerName">Ila Reigner</div>
+                    <div class="trainerPosition">Business Analytic</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+
+    <script>
+            var items = document.querySelectorAll(".listWrap .trainerItem")
+            // Simulate a media query using JavaScript
+            function applyResponsiveStyles() {
+              if (window.innerWidth <= 600) {
+                items.forEach(function item(item) {
+                  item.style.width = "48%"
+                })
+              } 
+              if (window.innerWidth <= 400) {
+                items.forEach(function item(item) {
+                  item.style.width = "98%"
+                })
+              } 
+            }
+        
+            // Apply the responsive styles on page load
+            applyResponsiveStyles();
+        
+            // Apply the responsive styles when the window is resized
+            window.onresize = applyResponsiveStyles;
+    </script>
+</body>
+</html>

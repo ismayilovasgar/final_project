@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Login {% endblock title %}
+
+
+{% block custom_css %} 
+<link rel="stylesheet" href="{% static 'css/accounts/login/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/accounts/login/responsive.css' %}">
+{% endblock custom_css %}
+
+
+{% comment %} ?--- Content ---* {% endcomment %}
+{% block content %}
+
+
+{% comment %}  {% endcomment %}
+<section class="login_page lightmode">
+    
+
+    <div class="container">
+        <div class="login-wrapper ">
+
+            <div class=" box-image box-col">
+            <img class="some-icon-light" src="{% static "assets/images/accounts/login/sideimage_light.png" %}" alt="sideimage"> 
+            <img class="some-icon-dark" src="{% static "assets/images/accounts/login/sideimage_dark.png" %}" alt="sideimage"> 
+            </div>
+            <div class="box-col">
+               <div class="box-form">
+                   <div class="inner">
+                       <form class="form-head" method="POST">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                           <div class="title">
+                               Login Page
+                           </div>
+                           <div class="form-group">
+                               <label class="label-text" for="id_login_username">Username</label>
+                               {{form.username}}
+                               {% if form.username.errors %}
+                                    <div class="error">{{ form.username.errors }}</div>
+                                {% endif %}
+                               {% comment %} <input type="text" placeholder="Username" name="username" id="id_login_username" value=""> {% endcomment %}
+                           </div>
+                           <div class="form-group">
+                               <label class="label-text" for="id_login_password">Password</label>
+                               {% comment %} <input type="password" placeholder="Password" name="password" id="id_login_password" > {% endcomment %}
+                               {{form.password}}
+                               {{form.password.errors}}
+                           </div>
+                           {% comment %} 
+                                <div class="form-button">
+                                    <div class="check-action">
+                                        <input type="checkbox" class="check">
+                                        <span class="name">Remember Me</span>
+                                    </div>
+                                    <a href="#" class="link">Forgot Password?</a>
+                                </div> 
+                           {% endcomment %}
+        
+                           <div class="actions">
+                               <button type="submit" class="btn btn-submit">Login Now</button>
+                               {% comment %} 
+                                    <button class="btn btn-google">
+                                        <span class="icon">
+                                            <img src="img/google.png" alt="google">
+                                            Or Sign-in with Google
+                                        </span>
+                                    </button> 
+                               {% endcomment %}
+                           </div>
+                       </form>
+                       <div class="bottom-register">
+                            <span class="remember_text">Don't have an account?</span>
+                            <a href="{% url "accounts:register" %}" class="link register_link">Join free Today!</a>
+                       </div>
+                       <p class="error_text">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                        <div class="custom_alert alert-error">
+                                        {{ message }}
+                                        </div>
+                                    {% endif %}
+                                    {% if message.tags == 'info' %}
+                                        <div class="custom_alert alert-success">
+                                        {{ message }}
+                                        </div>
+                                    {% endif %}  
+                                {% endfor %}
+                            {% endif %} 
+                       </p>
+                   </div>
+               </div>
+        
+              
+            </div>
+        </div>
+    </div>
+</section>
+{% comment %}  {% endcomment %}
+
+
+{% endblock content %}
+{% comment %} ?--- Content ---* {% endcomment %}
+
+{% block custom_js %}
+    <script src="{% static '/js/accounts/login.js' %}"></script>
+{% endblock custom_js  %}

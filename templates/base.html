@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %} Base Structure {% endblock title %}
+    </title>
+
+    {% block custom_favicon %} 
+    <link rel="shortcut icon" href="{% static 'assets/favicon/main.svg' %}" type="image/x-icon">
+    {% endblock custom_favicon %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    {% comment %} ? Swiper Css {% endcomment %}
+    {% block swiper_css %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    {% endblock swiper_css %}
+
+    <link rel="stylesheet" href=" {% static 'css/reset.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/base.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/responsive.css' %}">
+
+    {% comment %} ? My Custom Css {% endcomment %}
+    {% block custom_css %} {% endblock custom_css %}
+</head>
+<body>
+{% comment %}! <!--? Header Start  --> {% endcomment %}
+    
+
+    <section class="header lightmode">
+        <div class="wrapper">
+
+            <div class="container">
+                <div class="headerCenter">
+
+                    <div class="headerLinksWrap">
+                        <div class="navbarLogo">
+                            <a href="{% url "home" %}" class="headerLogo  {% if '/' == request.path %} which_page {% endif %}">
+                                <img class="some-icon-light" src="{% static '/assets/images/footer/logo-dark.svg' %}"
+                                alt="">
+                                <img class="some-icon-dark" src="{% static 'assets/images/footer/logo-light.svg' %}"
+                                alt="">
+                            </a>
+                        </div>
+
+                        <nav>
+                            <ul class="headerNav">
+                                <li class = "{% if 'features/' in request.path %} which_page {% endif %}">
+                                    <a href="{% url "features" %}" class="headerLink">Features</a>
+                                </li>
+                                <li class = "{% if 'pricing/' in request.path %} which_page {% endif %}">
+                                    <a href="{% url "pricing" %}" class="headerLink">Pricing</a>
+                                </li>
+                                <li class = "{% if 'download/' in request.path %} which_page {% endif %}">
+                                    <a href="{% url "download" %}" class="headerLink">Download</a>
+                                </li>
+                                <li class="drop">
+                                    <div class="headerLink dropdownMenu">
+                                        <span >Class</span>
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <ul class="classDropdownMenu">
+                                        <li>
+                                            <a href="{% url "programs" %}" class="class_link">
+                                                <div class="link_icon">
+                                                    <i class="fa-brands fa-youtube"></i>
+                                                </div>
+                                                <span class="link_text">Program Videos</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url "class02" %}" class="class_link">
+                                                <div class="link_icon">
+                                                    <i class="fa-solid fa-bolt"></i>
+                                                </div>
+                                                <span class="link_text">Premium Classes</span>
+                                            </a>
+                                        </li>
+                                        {% if user.is_authenticated %}
+                                        <li>
+                                            <a href="{% url "accounts:dashboard" %}" class="class_link">
+                                                <div class="link_icon dashboard">
+                                                    <i class="fa-solid fa-bolt"></i>
+                                                </div>
+                                                <span class="link_text">My Courses</span>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                <li class = "{% if 'lifestyle/' in request.path %} which_page {% endif %}">
+                                    <a href="{% url "lifestyle" %}" class="headerLink">Lifestyle</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                    <div class="headerGroups">
+                        <ul class="social_links">
+                            <li>
+                                <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+                            </li>
+                        </ul>
+
+                        <div class="buttonGroups">
+                            {% comment %} <button class="headerTrialBtn">Get free trial</button> {% endcomment %}
+                            <ul class="accounts_ul">
+                                {% if user.is_authenticated %}
+                                    <li class="account_link">
+                                        <a href="{% url "accounts:logout" %}" class="log_link logout_link">
+                                            <i class="fa-solid fa-right-from-bracket"></i>
+                                        </a>
+                                    </li>
+
+                                {% else %}
+                                    <li class="account_link">
+                                        <a href="{% url "accounts:login" %}" class="log_link login_link">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            <button class="hidden"><i class="fa-solid fa-bars"></i></button>
+                        </div>
+                    </div>
+                    {% comment %}? Log in Messages {% endcomment %}
+                    {% if user.is_authenticated %}
+                        {% if  login_success %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == 'success' %}
+                                            <div class="alert alert-success login_msg_position">
+                                           Welcome {{ request.user.username }}
+                                            </div>
+                                        {% endif %} 
+                                    {% endfor %}
+                                {% endif %} 
+                                <script>
+                                    const login_message=document.querySelector(".login_msg_position");
+                                    login_message.classList.add("show_alert_msg")
+                                    setTimeout((e) => {
+                                        login_message.classList.remove("show_alert_msg");
+                                    }, 1550);
+                                </script>
+                        {% endif %}
+                    {% endif %}
+                    {% comment %}? Dashboard circle {% endcomment %}
+                    {% if user.is_authenticated %}
+                        <a class="dashboard_circle" href="{% url "accounts:dashboard" %}"><i class="fa-regular fa-user"></i></a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            {% comment %} <!-- Tablet Mode --> {% endcomment %}
+            <div class="tabletMenu" id="tabletMenu">
+                <div class="container">
+                    <div class="wrap">
+                        <ul class="menuLinks">
+                            <li class="menuLink">
+                                <a href="{% url "features" %}">Features</a>
+                            </li>
+                            <li class="menuLink">
+                                <a href="{% url "pricing" %}">Pricing</a>
+                            </li>
+                            <li class="menuLink">
+                                <a href="{% url "download" %}">Download</a>
+                            </li>
+                            <li class="dropdownLink">
+                                <a href="#">Class</a>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </li>
+                        </ul>
+                        <div class="menuContact">
+                            <ul class="contactInfo">
+                                <li>
+                                    <div class="infoTitle">Montanachester</div>
+                                    <div class="infoText">06787 Block Estates</div>
+                                </li>
+                                <li>
+                                    <div class="infoTitle">Lake Gene</div>
+                                    <div class="infoText">167 Emard River</div>
+                                </li>
+                                <li>
+                                    <div class="infoTitle">North Hassiefort</div>
+                                    <div class="infoText">032 Leonora Spurs</div>
+                                </li>
+                                <li>
+                                    <div class="socials">
+                                        <a href="#">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </a>
+                                        <a href="https://www.instagram.com/">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                        <a href="https://www.behance.net/">
+                                            <i class="fa-solid fa-basketball"></i>
+                                        </a>
+                                        <a href="https://www.behance.net/">
+                                            <i class="fa-brands fa-behance"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dropdownBody">
+                        <div class="bodyHead">
+                            <div class="headRow">
+                                <div class="headCol headLeftCol">
+                                    <div class="headerMenu">
+                                        <a class="headerBox" href="{% url "programs" %}">
+                                            <div class="headerIcon">
+                                                <i class="fa-brands fa-youtube"></i>
+                                            </div>
+                                            <div class="headerText">Programs Videos</div>
+                                        </a>
+                                        <a class="headerBox" href=" {% url "class02" %}">
+                                            <div class="headerIcon">
+                                                <i class="fa-solid fa-bolt"></i>
+                                            </div>
+                                            <div class="headerText">Premium Class</div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="headCol headRightCol">
+
+                                    <div class="swiper swiper_content_navbar">
+                                        <div class="swiper-wrapper">
+
+                                             {% for course in courses %}
+                                             
+                                                <a class="headerItem swiper-slide" href="#">
+                                                    <div class="headerPhoto">
+                                                        <img src="{{ course.image.url}}" alt="">
+                                                    </div>
+                                                    <div class="headerDescription">
+                                                        <div class="headerStatus yoga">{{course.category.name}}</div>
+                                                        <div class="headerUser">
+                                                            <div class="headerAvatar">
+                                                                <img src="{{course.trainer.image.url}}" alt="">
+                                                            </div>
+                                                            <div class="headerDetail">
+                                                                <div class="headerTitle">{{course.title | capfirst }}</div>
+                                                                <div class="headerTrainer">{{course.trainer.fullname}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+
+                                            {% endfor %} 
+
+                                            {% comment %} 
+                                            <a class="headerItem swiper-slide" href="#">
+                                                    <div class="headerPhoto">
+                                                        <img src="{% static '/assets/images/desktopMode/header-pic-2@2x.png' %}" alt="">
+                                                    </div>
+                                                    <div class="headerDescription">
+                                                        <div class="headerStatus yoga">
+                                                            Yoga
+                                                        </div>
+                                                        <div class="headerUser">
+                                                            <div class="headerAvatar">
+                                                                <img src="{% static '/assets/images/tabletMode/avatar-2.png' %}" alt="">
+                                                            </div>
+                                                            <div class="headerDetail">
+                                                                <div class="headerTitle">Sweet and Tome
+                                                                </div>
+                                                                <div class="headerTrainer">Zack Beier</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </a>
+                                            <a class="headerItem swiper-slide" href="#">
+                                                        <div class="headerPhoto">
+                                                            <img src="{% static 'assets/images/desktopMode/header-pic-3@2x.png' %}" alt="">
+                                                        </div>
+                                                        <div class="headerDescription">
+                                                            <div class="headerStatus mindfullness">
+                                                                mindfullness
+                                                            </div>
+                                                            <div class="headerUser">
+                                                                <div class="headerAvatar">
+                                                                    <img src="{% static 'assets/images/desktopMode/avatar-3.png' %}" alt="">
+                                                                </div>
+                                                                <div class="headerDetail">
+                                                                    <div class="headerTitle">
+                                                                        Sweet and Tome
+                                                                    </div>
+                                                                    <div class="headerTrainer">Zack Beier</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </a>   
+                                            {% endcomment %}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottomMenuLink lastElement">
+                        <a href="{% url "lifestyle" %}">Lifestyle</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% comment %} ! Header End {% endcomment %}
+    {% block content %}
+
+
+
+    {% endblock content %}
+{% comment %} ? Footer Start {% endcomment %}
+
+    <footer class="lightmode">
+        <div class="container">
+            <div class="footer__center center">
+
+                <div class="footer__col">
+                    <div class="footer__box">
+                        <a href="{% url "home" %}" class="footer__logo">
+                            <img class="some-icon-light" src="{% static '/assets/images/footer/logo-dark.svg' %}"
+                                alt="">
+                            <img class="some-icon-dark" src="{% static 'assets/images/footer/logo-light.svg' %}"
+                                alt="">
+                        </a>
+                        <label class="label_footer" id="dark-change"></label>
+                    </div>
+                    <div class="footer__item">
+                        <div class="footer__category">
+                            footer nav
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                        <div class="footer__menu">
+                            <ul>
+                                <li><a class="footer__link" href="{% url "lifestyle" %}">Lifestyle</a></li>
+                                <li><a class="footer__link" href="{% url "pricing" %}">Pricing</a></li>
+                                {% comment %} <li><a class="footer__link" href="{% url "class02" %}">Class</a></li> {% endcomment %}
+                                <li><a class="footer__link" href="#">Class</a></li>
+                                <li><a class="footer__link" href="{% url "features" %}">Features</a></li>
+                                <li><a class="footer__link" href="{% url "download" %}">Download</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="footer__col">
+                    <div class="footer__category">contact</div>
+                    <div class="footer__info__details">
+                        <p class="into__detail">43252 Borer Mountains</p>
+                        <p class="into__detail">Zackerychester</p>
+                        <p class="into__detail">Bahamas</p>
+                        <p class="into__detail">732-528-4945</p>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="footer__col">
+                    <div class="footer__category">newsletter</div>
+                    <div class="footer__info">
+                        Subscribe our newsletter to get more free design course and resource.
+                    </div>
+                    <form  method="POST" action="{% url "send_simple_mail" %}"  class="footer_subs_form" id="base_bottom_form">
+                        {% csrf_token %}
+                        <input class="subscription__input" type="email" name="email" placeholder="your mail">
+                        <button class="subscription__btn" type="submit">
+                            <i class="fa-solid fa-arrow-right"></i> 
+                            {% comment %} <img src="{% static 'assets/images/footer/arrow.svg' %}" alt=""> {% endcomment %}
+                        </button>
+                    </form>
+                    <div id="message" class="result_email_msg">Demo</div>
+
+                </div>
+
+
+            </div>
+            <div class="bottom-bar">
+                <div class="bar_wrapper">
+                    <span>Copyright © 2021 UI8 LLC. All rights reserved</span>
+                    <ul>
+                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.behance.net/"><i class="fa-solid fa-basketball"></i></a></li>
+                        <li><a href="https://www.behance.net/"><i class="fa-brands fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% comment %} ! Footer End {% endcomment %}
+    {% block swiper_js %}
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {% endblock swiper_js %}
+
+    <script src="{% static '/js/base.js' %}"></script>
+    {% block custom_js %} {% endblock custom_js  %}
+</body>
+
+</html>

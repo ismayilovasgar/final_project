@@ -8,11 +8,23 @@
 
 // ! snow drops
 
+// Sayfadaki maksimum kar tanesi sayısı
+const maxDrops = 10;
+let currentDrops = 0;
+let snowing = false; // Kar yağışı durumunu takip etmek için bir flag
+let snowInterval; // Kar tanesi yaratma intervali
+let snowDuration = 10000; // Kar yağışının süresi (10 saniye)
+
+// Kar tanesi yaratma fonksiyonu
 function createDrop() {
+  // Sayıyı sınırlıyoruz
+  if (currentDrops >= maxDrops) return;
+
+  currentDrops++; // Yeni bir kar tanesi eklediğimizde sayacı artırıyoruz.
+
   const drop = document.createElement("img");
   drop.classList.add("mydrop");
-  // drop.src = "{% static 'assets/images/theme/snowflake.png' %}";
-  drop.src = "/static/assets/images/theme/snowflake.png";
+  drop.src = "/static/assets/images/theme/snowflake.png"; // Kar tanesi resmi
 
   // Kar tanesinin yatay pozisyonunu rastgele belirle
   drop.style.left = Math.random() * window.innerWidth + "px";
@@ -26,11 +38,43 @@ function createDrop() {
   // Kar tanesi ekranın altına ulaştığında sil
   setTimeout(() => {
     drop.remove();
-  }, 7000); // 4 saniye sonra kaldır
+    currentDrops--; // Kar tanesi silindiğinde, sayıdan bir azaltıyoruz
+  }, 7000); // 7 saniye sonra kaldır
 }
 
-// Kar tanelerinin sürekli oluşturulması
-setInterval(createDrop, 700); // Her 100ms'de bir yeni kar tanesi oluştur
+// Kar yağışı başlatma fonksiyonu
+function startSnowing() {
+  if (snowing) return; // Eğer kar yağışı zaten başlarsa bir şey yapma
+  snowing = true;
+
+  // Kar tanelerini oluşturmak için bir interval başlatıyoruz
+  snowInterval = setInterval(createDrop, 1000); // Her 1000ms'de bir yeni kar tanesi oluştur
+}
+
+// Kar yağışını durdurma fonksiyonu
+function stopSnowing() {
+  clearInterval(snowInterval); // Kar yağışını durdur
+  snowing = false; // Kar yağışı bitti
+
+  // Önceden eklenmiş kar tanelerini temizle
+  const drops = document.querySelectorAll(".mydrop");
+  drops.forEach((drop) => drop.remove());
+  currentDrops = 0; // Kar tanelerinin sayısını sıfırla
+}
+
+// Sayfa kaydırıldığında kar yağışını başlat/durdur
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100 && !snowing) {
+    // Sayfa kaydırma miktarı 100px'yi geçtiğinde kar yağışı başlasın
+    startSnowing(); // Kar yağışını başlat
+  }
+
+  // Sayfa sıfıra çok yakın olduğunda kar yağışını durdur
+  if (window.scrollY < 5 && snowing) {
+    // Tolerans ekleniyor
+    stopSnowing(); // Kar yağışını durdur
+  }
+});
 
 // !
 

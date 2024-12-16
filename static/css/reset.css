@@ -31,10 +31,12 @@
   --product-card-back-color: #e6e8ec;
   --icon-dark-light-mode: #f4f5f6;
   --homeabout-back-color: #e6e8ec;
+
   /* Login */
   --login-title: #1a202c;
   --login-button: #353945;
   --label-title-text: #1a202c;
+  
   /* Change theme animation */
   transition: background-color 1s ease-out, color 1s ease-out;
 }

@@ -6,14 +6,13 @@
 //   dropdownArrow.classList.toggle("rotate_180");
 // });
 
-// ! snow drops
-
-// Sayfadaki maksimum kar tanesi sayısı
+// todos: Start snow drops
+// // Sayfadaki maksimum kar tanesi sayısı
 const maxDrops = 10;
 let currentDrops = 0;
 let snowing = false; // Kar yağışı durumunu takip etmek için bir flag
 let snowInterval; // Kar tanesi yaratma intervali
-let snowDuration = 10000; // Kar yağışının süresi (10 saniye)
+let snowDuration = 2000; // Kar yağışının süresi (10 saniye)
 
 // Kar tanesi yaratma fonksiyonu
 function createDrop() {
@@ -63,20 +62,57 @@ function stopSnowing() {
 }
 
 // Sayfa kaydırıldığında kar yağışını başlat/durdur
+window.addEventListener("scroll", () => {});
+
+// todos: End
+
+// todos: Start background music
+// Müzik elementini alıyoruz
+const music = document.getElementById("backgroundMusic");
+
+// Sayfa kaydırıldıkça müzik kontrolünü yapmak için scroll event'i ekliyoruz
 window.addEventListener("scroll", () => {
   if (window.scrollY > 100 && !snowing) {
     // Sayfa kaydırma miktarı 100px'yi geçtiğinde kar yağışı başlasın
     startSnowing(); // Kar yağışını başlat
+    handleMusicPlayback();
   }
 
   // Sayfa sıfıra çok yakın olduğunda kar yağışını durdur
   if (window.scrollY < 5 && snowing) {
     // Tolerans ekleniyor
     stopSnowing(); // Kar yağışını durdur
+    handleMusicPlayback();
   }
 });
 
-// !
+// Müzik çalma ve durdurma fonksiyonu
+function handleMusicPlayback() {
+  // Sayfa kaydırma mesafesi 100px'yi geçtiyse müzik çalsın
+  if (window.scrollY > 100) {
+    if (music.paused) {
+      // Eğer müzik çalmıyorsa başlat
+      music
+        .play()
+        .then(() => {
+          console.log("Müzik başladı");
+        })
+        .catch((error) => {
+          console.error("Müzik çalma hatası:", error);
+        });
+    }
+  } else {
+    if (!music.paused) {
+      // Eğer müzik çalıyorsa durdur
+      music.pause();
+      console.log("Müzik durduruldu");
+    }
+  }
+}
+
+// ?----------------------------------- Test Section ------------------------------------------------
+
+// ?----------------------------------- Test Section ------------------------------------------------
 
 // Bars Menu
 const btnHidden = document.querySelector("i.fa-solid.fa-bars");

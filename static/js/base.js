@@ -6,6 +6,34 @@
 //   dropdownArrow.classList.toggle("rotate_180");
 // });
 
+// ! snow drops
+
+function createDrop() {
+  const drop = document.createElement("img");
+  drop.classList.add("mydrop");
+  // drop.src = "{% static 'assets/images/theme/snowflake.png' %}";
+  drop.src = "/static/assets/images/theme/snowflake.png";
+
+  // Kar tanesinin yatay pozisyonunu rastgele belirle
+  drop.style.left = Math.random() * window.innerWidth + "px";
+
+  // Rastgele düşme süresi (örneğin 2-4 saniye)
+  drop.style.animationDuration = Math.random() * 2 + 2 + "s";
+
+  // Kar tanesini mydrops içine ekle
+  document.getElementById("mydrops").appendChild(drop);
+
+  // Kar tanesi ekranın altına ulaştığında sil
+  setTimeout(() => {
+    drop.remove();
+  }, 7000); // 4 saniye sonra kaldır
+}
+
+// Kar tanelerinin sürekli oluşturulması
+setInterval(createDrop, 700); // Her 100ms'de bir yeni kar tanesi oluştur
+
+// !
+
 // Bars Menu
 const btnHidden = document.querySelector("i.fa-solid.fa-bars");
 const headerTrialBtn = document.querySelector(".headerTrialBtn");
@@ -124,28 +152,31 @@ function setLightMode() {
   show_all_item(light_images);
 }
 
-// 
-document.querySelector('.button_arrow_bottom').addEventListener('click', function () {
-  const footer = document.getElementById('main_footer');
-  const footerPosition = footer.offsetTop;        // Footer'ın dikey pozisyonu
-  const scrollStep = 100;                          // Her adımda kaydırılacak piksel
-  const delay = 15;                               // Adımlar arasındaki süre (ms)
+//
+document
+  .querySelector(".button_arrow_bottom")
+  .addEventListener("click", function () {
+    const footer = document.getElementById("main_footer");
+    const footerPosition = footer.offsetTop; // Footer'ın dikey pozisyonu
+    const scrollStep = 100; // Her adımda kaydırılacak piksel
+    const delay = 15; // Adımlar arasındaki süre (ms)
 
-  const interval = setInterval(() => {
+    const interval = setInterval(() => {
       // Mevcut kaydırma pozisyonunu al
       const currentScroll = window.scrollY;
 
       // Eğer footer'a ulaşıldıysa durdur
-      if (currentScroll + window.innerHeight >= document.body.scrollHeight || currentScroll >= footerPosition) {
-          clearInterval(interval);
+      if (
+        currentScroll + window.innerHeight >= document.body.scrollHeight ||
+        currentScroll >= footerPosition
+      ) {
+        clearInterval(interval);
       } else {
-          // Her adımda kaydırmayı artır
-          window.scrollBy(0, scrollStep);
+        // Her adımda kaydırmayı artır
+        window.scrollBy(0, scrollStep);
       }
-  }, delay);
-});
-
-
+    }, delay);
+  });
 
 //? Send Message Form Code
 // Handle form submission via Fetch API

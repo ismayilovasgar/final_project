@@ -1,0 +1,49 @@
+/* responsiveness */
+@media (min-height: 1000px) {
+  .login-wrapper {
+    height: calc(100vh - (92px + 408px));
+  }
+}
+
+/* @media (min-height: 1000px) {
+  .login-wrapper {
+    height: calc(100vh - (92px + 408px));
+  }
+} */
+
+@media (max-width: 768px) {
+  section.login_page {
+    height: unset;
+  }
+  .login-wrapper .box-image {
+    display: none;
+  }
+  .login-wrapper .box-col {
+    width: 100%;
+  }
+  .login-wrapper .inner {
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 530px) {
+  .login-wrapper {
+    /* padding: 20px; */
+  }
+  .login-wrapper .box-form {
+    height: auto;
+  }
+  .bottom-register {
+    margin: 20px 0px;
+    position: relative;
+  }
+  .form-head .title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-wrapper .inner {
+    max-width: 95%;
+  }
+}

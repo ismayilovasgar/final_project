@@ -8,109 +8,188 @@
 
 // todos: Start snow drops
 // // Sayfadaki maksimum kar tanesi sayısı
+// const maxDrops = 10;
+// let currentDrops = 0;
+// let snowing = false; // Kar yağışı durumunu takip etmek için bir flag
+// let snowInterval; // Kar tanesi yaratma intervali
+// let musicTimeout; // Müzik için zamanlayıcı
+// let snowTimeout; // Kar için zamanlayıcı
+
+// // Müzik elementini alıyoruz
+// const music = document.getElementById("backgroundMusic");
+
+// // Kar tanesi yaratma fonksiyonu
+// function createDrop() {
+//   if (currentDrops >= maxDrops) return; // Sayıyı sınırlıyoruz
+
+//   currentDrops++;
+//   const drop = document.createElement("img");
+//   drop.classList.add("mydrop");
+//   drop.src = "/static/assets/images/theme/snowflake.png";
+//   drop.style.left = Math.random() * window.innerWidth + "px";
+//   drop.style.animationDuration = Math.random() * 2 + 2 + "s";
+
+//   document.getElementById("mydrops").appendChild(drop);
+
+//   setTimeout(() => {
+//     drop.remove();
+//     currentDrops--;
+//   }, 7000); // Kar tanesi 7 saniye sonra kaldırılır
+// }
+
+// // Kar yağışı başlatma fonksiyonu
+// function startSnowing() {
+//   if (snowing) return; // Eğer kar yağışı zaten aktifse bir şey yapma
+//   snowing = true;
+
+//   snowInterval = setInterval(createDrop, 1000); // Her saniyede bir kar tanesi yarat
+//   console.log("Kar yağışı başladı");
+
+//   // Kar yağışını 2.5 saniye sonra durdur
+//   snowTimeout = setTimeout(() => {
+//     stopSnowing();
+//   }, 7000);
+// }
+
+// // Kar yağışını durdurma fonksiyonu
+// function stopSnowing() {
+//   clearInterval(snowInterval); // Interval'i durdur
+//   snowing = false;
+
+//   // Eklenmiş kar tanelerini temizle
+//   const drops = document.querySelectorAll(".mydrop");
+//   drops.forEach((drop) => drop.remove());
+//   currentDrops = 0;
+
+//   console.log("Kar yağışı durduruldu");
+// }
+
+// // Müzik çalma fonksiyonu
+// function startMusic() {
+//   if (music.paused) {
+//     music
+//       .play()
+//       .then(() => {
+//         console.log("Müzik başladı");
+//       })
+//       .catch((error) => {
+//         console.error("Müzik çalma hatası:", error);
+//       });
+
+//     // Müzik 1.5 saniye sonra durdurulacak
+//     musicTimeout = setTimeout(() => {
+//       music.pause();
+//       music.currentTime = 0; // Müziği başa sar
+//       console.log("Müzik durduruldu");
+//     }, 10000);
+//   }
+// }
+
+// // Scroll eventini dinleyerek işlemi başlatma
+// let scrolled = false; // Scroll kontrolü için flag
+// window.addEventListener("scroll", () => {
+//   if (!scrolled) {
+//     // İlk scroll olduğunda işlemleri başlat
+//     scrolled = true; // Tekrar tetiklenmesin
+
+//     startSnowing(); // Kar yağışı başlat
+//     startMusic(); // Müzik başlat
+//   }
+// });
+
+// ?----------------------------------- Test Section ------------------------------------------------
 const maxDrops = 10;
 let currentDrops = 0;
-let snowing = false; // Kar yağışı durumunu takip etmek için bir flag
+let snowing = false; // Kar yağışı durumu
 let snowInterval; // Kar tanesi yaratma intervali
-let snowDuration = 2000; // Kar yağışının süresi (10 saniye)
+let musicTimeout; // Müzik için zamanlayıcı
+let snowTimeout; // Kar için zamanlayıcı
+const music = document.getElementById("backgroundMusic");
 
 // Kar tanesi yaratma fonksiyonu
 function createDrop() {
-  // Sayıyı sınırlıyoruz
-  if (currentDrops >= maxDrops) return;
+  if (currentDrops >= maxDrops) return; // Sayıyı sınırlıyoruz
 
-  currentDrops++; // Yeni bir kar tanesi eklediğimizde sayacı artırıyoruz.
-
+  currentDrops++;
   const drop = document.createElement("img");
   drop.classList.add("mydrop");
-  drop.src = "/static/assets/images/theme/snowflake.png"; // Kar tanesi resmi
-
-  // Kar tanesinin yatay pozisyonunu rastgele belirle
+  drop.src = "/static/assets/images/theme/snowflake.png";
   drop.style.left = Math.random() * window.innerWidth + "px";
-
-  // Rastgele düşme süresi (örneğin 2-4 saniye)
   drop.style.animationDuration = Math.random() * 2 + 2 + "s";
 
-  // Kar tanesini mydrops içine ekle
   document.getElementById("mydrops").appendChild(drop);
 
-  // Kar tanesi ekranın altına ulaştığında sil
   setTimeout(() => {
     drop.remove();
-    currentDrops--; // Kar tanesi silindiğinde, sayıdan bir azaltıyoruz
-  }, 7000); // 7 saniye sonra kaldır
+    currentDrops--;
+  }, 7000); // Kar tanesi 7 saniye sonra kaldırılır
 }
 
 // Kar yağışı başlatma fonksiyonu
 function startSnowing() {
-  if (snowing) return; // Eğer kar yağışı zaten başlarsa bir şey yapma
+  if (snowing) return; // Eğer kar yağışı zaten aktifse bir şey yapma
   snowing = true;
 
-  // Kar tanelerini oluşturmak için bir interval başlatıyoruz
-  snowInterval = setInterval(createDrop, 1000); // Her 1000ms'de bir yeni kar tanesi oluştur
+  snowInterval = setInterval(createDrop, 1000); // Her saniyede bir kar tanesi yarat
+  console.log("Kar yağışı başladı");
+
+  // Kar yağışını 7 saniye sonra durdur
+  snowTimeout = setTimeout(() => {
+    stopSnowing();
+  }, 7000);
 }
 
 // Kar yağışını durdurma fonksiyonu
 function stopSnowing() {
-  clearInterval(snowInterval); // Kar yağışını durdur
-  snowing = false; // Kar yağışı bitti
+  clearInterval(snowInterval); // Interval'i durdur
+  snowing = false;
 
-  // Önceden eklenmiş kar tanelerini temizle
+  // Eklenmiş kar tanelerini temizle
   const drops = document.querySelectorAll(".mydrop");
   drops.forEach((drop) => drop.remove());
-  currentDrops = 0; // Kar tanelerinin sayısını sıfırla
+  currentDrops = 0;
+
+  console.log("Kar yağışı durduruldu");
 }
 
-// Sayfa kaydırıldığında kar yağışını başlat/durdur
-window.addEventListener("scroll", () => {});
+// Müzik çalma fonksiyonu
+function startMusic() {
+  if (music.paused) {
+    music
+      .play()
+      .then(() => {
+        console.log("Müzik başladı");
+      })
+      .catch((error) => {
+        console.error("Müzik çalma hatası:", error);
+      });
 
-// todos: End
-
-// todos: Start background music
-// Müzik elementini alıyoruz
-const music = document.getElementById("backgroundMusic");
-
-// Sayfa kaydırıldıkça müzik kontrolünü yapmak için scroll event'i ekliyoruz
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100 && !snowing) {
-    // Sayfa kaydırma miktarı 100px'yi geçtiğinde kar yağışı başlasın
-    startSnowing(); // Kar yağışını başlat
-    handleMusicPlayback();
+    // Müzik 10 saniye sonra durdurulacak
+    musicTimeout = setTimeout(() => {
+      music.pause();
+      music.currentTime = 0; // Müziği başa sar
+      console.log("Müzik durduruldu");
+    }, 7000);
   }
+}
 
-  // Sayfa sıfıra çok yakın olduğunda kar yağışını durdur
-  if (window.scrollY < 5 && snowing) {
-    // Tolerans ekleniyor
-    stopSnowing(); // Kar yağışını durdur
-    handleMusicPlayback();
+// Sayfa yüklendiğinde scroll durumunu kontrol et
+window.addEventListener("load", () => {
+  // Sayfa yenilendiğinde scroll en üstteyse
+  if (window.scrollY === 0) {
+    // Scroll sıfırdayken, ve kullanıcı kaydırma yaparsa
+    let hasScrolled = false;
+
+    window.addEventListener("scroll", () => {
+      if (!hasScrolled && window.scrollY > 0) {
+        // Eğer kullanıcı sayfayı kaydırmaya başlarsa
+        hasScrolled = true; // Bu sadece ilk kaydırma için geçerli
+        startSnowing(); // Kar yağışı başlat
+        startMusic(); // Müzik başlat
+      }
+    });
   }
 });
-
-// Müzik çalma ve durdurma fonksiyonu
-function handleMusicPlayback() {
-  // Sayfa kaydırma mesafesi 100px'yi geçtiyse müzik çalsın
-  if (window.scrollY > 100) {
-    if (music.paused) {
-      // Eğer müzik çalmıyorsa başlat
-      music
-        .play()
-        .then(() => {
-          console.log("Müzik başladı");
-        })
-        .catch((error) => {
-          console.error("Müzik çalma hatası:", error);
-        });
-    }
-  } else {
-    if (!music.paused) {
-      // Eğer müzik çalıyorsa durdur
-      music.pause();
-      console.log("Müzik durduruldu");
-    }
-  }
-}
-
-// ?----------------------------------- Test Section ------------------------------------------------
 
 // ?----------------------------------- Test Section ------------------------------------------------
 

@@ -5,6 +5,7 @@
 
 /* ! snow drops */
 
+
 #mydrops {
   display: block;
   position: fixed;
@@ -26,17 +27,6 @@
   object-fit: contain;
 }
 
-/* .mydrop {
-  position: absolute;
-  top: -20px;
-  width: 2px;
-  height: 15px;
-  background: lightblue;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: fall linear infinite;
-} */
-
 @keyframes fall {
   0% {
     transform: translateY(0);
@@ -45,18 +35,6 @@
     transform: translateY(100vh);
   }
 }
-
-/* Genel stil */
-/* body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background: linear-gradient(to bottom, #1e2a47, #23456c); 
-  overflow: hidden;
-  position: relative;
-}
-
-
 
 /* ! */
 /*? Alert Messages */

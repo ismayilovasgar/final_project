@@ -63,12 +63,13 @@
   color: var(--Neutrals-8);
 }
 .heroHeader .wrap .contentCol .button_arrow_bottom {
+  transition: all 0.5s ease-in;
   margin: 140px 0 0 0;
   padding: 18px;
   border-radius: 50%;
   border: 2px solid var(--Neutrals-6, #e6e8ec);
 }
-.heroHeader .wrap .contentCol .button_arrow_bottom:hover{
+.heroHeader .wrap .contentCol .button_arrow_bottom:hover {
   cursor: pointer;
 }
 .heroHeader .wrap .contentCol .button_arrow_bottom i {

@@ -98,98 +98,98 @@
 // });
 
 // ?----------------------------------- Test Section ------------------------------------------------
-const maxDrops = 10;
-let currentDrops = 0;
-let snowing = false; // Kar yağışı durumu
-let snowInterval; // Kar tanesi yaratma intervali
-let musicTimeout; // Müzik için zamanlayıcı
-let snowTimeout; // Kar için zamanlayıcı
-const music = document.getElementById("backgroundMusic");
+// const maxDrops = 10;
+// let currentDrops = 0;
+// let snowing = false; // Kar yağışı durumu
+// let snowInterval; // Kar tanesi yaratma intervali
+// let musicTimeout; // Müzik için zamanlayıcı
+// let snowTimeout; // Kar için zamanlayıcı
+// const music = document.getElementById("backgroundMusic");
 
-// Kar tanesi yaratma fonksiyonu
-function createDrop() {
-  if (currentDrops >= maxDrops) return; // Sayıyı sınırlıyoruz
+// // Kar tanesi yaratma fonksiyonu
+// function createDrop() {
+//   if (currentDrops >= maxDrops) return; // Sayıyı sınırlıyoruz
 
-  currentDrops++;
-  const drop = document.createElement("img");
-  drop.classList.add("mydrop");
-  drop.src = "/static/assets/images/theme/snowflake.png";
-  drop.style.left = Math.random() * window.innerWidth + "px";
-  drop.style.animationDuration = Math.random() * 2 + 2 + "s";
+//   currentDrops++;
+//   const drop = document.createElement("img");
+//   drop.classList.add("mydrop");
+//   drop.src = "/static/assets/images/theme/snowflake.png";
+//   drop.style.left = Math.random() * window.innerWidth + "px";
+//   drop.style.animationDuration = Math.random() * 2 + 2 + "s";
 
-  document.getElementById("mydrops").appendChild(drop);
+//   document.getElementById("mydrops").appendChild(drop);
 
-  setTimeout(() => {
-    drop.remove();
-    currentDrops--;
-  }, 7000); // Kar tanesi 7 saniye sonra kaldırılır
-}
+//   setTimeout(() => {
+//     drop.remove();
+//     currentDrops--;
+//   }, 7000); // Kar tanesi 7 saniye sonra kaldırılır
+// }
 
-// Kar yağışı başlatma fonksiyonu
-function startSnowing() {
-  if (snowing) return; // Eğer kar yağışı zaten aktifse bir şey yapma
-  snowing = true;
+// // Kar yağışı başlatma fonksiyonu
+// function startSnowing() {
+//   if (snowing) return; // Eğer kar yağışı zaten aktifse bir şey yapma
+//   snowing = true;
 
-  snowInterval = setInterval(createDrop, 1000); // Her saniyede bir kar tanesi yarat
-  console.log("Kar yağışı başladı");
+//   snowInterval = setInterval(createDrop, 1000); // Her saniyede bir kar tanesi yarat
+//   console.log("Kar yağışı başladı");
 
-  // Kar yağışını 7 saniye sonra durdur
-  snowTimeout = setTimeout(() => {
-    stopSnowing();
-  }, 7000);
-}
+//   // Kar yağışını 7 saniye sonra durdur
+//   snowTimeout = setTimeout(() => {
+//     stopSnowing();
+//   }, 7000);
+// }
 
-// Kar yağışını durdurma fonksiyonu
-function stopSnowing() {
-  clearInterval(snowInterval); // Interval'i durdur
-  snowing = false;
+// // Kar yağışını durdurma fonksiyonu
+// function stopSnowing() {
+//   clearInterval(snowInterval); // Interval'i durdur
+//   snowing = false;
 
-  // Eklenmiş kar tanelerini temizle
-  const drops = document.querySelectorAll(".mydrop");
-  drops.forEach((drop) => drop.remove());
-  currentDrops = 0;
+//   // Eklenmiş kar tanelerini temizle
+//   const drops = document.querySelectorAll(".mydrop");
+//   drops.forEach((drop) => drop.remove());
+//   currentDrops = 0;
 
-  console.log("Kar yağışı durduruldu");
-}
+//   console.log("Kar yağışı durduruldu");
+// }
 
-// Müzik çalma fonksiyonu
-function startMusic() {
-  if (music.paused) {
-    music
-      .play()
-      .then(() => {
-        console.log("Müzik başladı");
-      })
-      .catch((error) => {
-        console.error("Müzik çalma hatası:", error);
-      });
+// // Müzik çalma fonksiyonu
+// function startMusic() {
+//   if (music.paused) {
+//     music
+//       .play()
+//       .then(() => {
+//         console.log("Müzik başladı");
+//       })
+//       .catch((error) => {
+//         console.error("Müzik çalma hatası:", error);
+//       });
 
-    // Müzik 10 saniye sonra durdurulacak
-    musicTimeout = setTimeout(() => {
-      music.pause();
-      music.currentTime = 0; // Müziği başa sar
-      console.log("Müzik durduruldu");
-    }, 7000);
-  }
-}
+//     // Müzik 10 saniye sonra durdurulacak
+//     musicTimeout = setTimeout(() => {
+//       music.pause();
+//       music.currentTime = 0; // Müziği başa sar
+//       console.log("Müzik durduruldu");
+//     }, 7000);
+//   }
+// }
 
-// Sayfa yüklendiğinde scroll durumunu kontrol et
-window.addEventListener("load", () => {
-  // Sayfa yenilendiğinde scroll en üstteyse
-  if (window.scrollY === 0) {
-    // Scroll sıfırdayken, ve kullanıcı kaydırma yaparsa
-    let hasScrolled = false;
+// // Sayfa yüklendiğinde scroll durumunu kontrol et
+// window.addEventListener("load", () => {
+//   // Sayfa yenilendiğinde scroll en üstteyse
+//   if (window.scrollY === 0) {
+//     // Scroll sıfırdayken, ve kullanıcı kaydırma yaparsa
+//     let hasScrolled = false;
 
-    window.addEventListener("scroll", () => {
-      if (!hasScrolled && window.scrollY > 0) {
-        // Eğer kullanıcı sayfayı kaydırmaya başlarsa
-        hasScrolled = true; // Bu sadece ilk kaydırma için geçerli
-        startSnowing(); // Kar yağışı başlat
-        startMusic(); // Müzik başlat
-      }
-    });
-  }
-});
+//     window.addEventListener("scroll", () => {
+//       if (!hasScrolled && window.scrollY > 0) {
+//         // Eğer kullanıcı sayfayı kaydırmaya başlarsa
+//         hasScrolled = true; // Bu sadece ilk kaydırma için geçerli
+//         startSnowing(); // Kar yağışı başlat
+//         startMusic(); // Müzik başlat
+//       }
+//     });
+//   }
+// });
 
 // ?----------------------------------- Test Section ------------------------------------------------
 

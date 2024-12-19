@@ -136,7 +136,7 @@
                     <div class="swiper-wrapper">
 
                         {% for course  in courses %}
-                            <div class="card swiper-slide">
+                        <a href="{% url 'programs_detail' course.id %}" class="card swiper-slide">
                                 <div class="cardPreview">
                                     {% comment %} <img src="{% static 'assets/images/class_01_detail/catalogList/card-pic-1.png' %}" alt=""> {% endcomment %}
                                     <img src="{{course.image.url}}" alt="">
@@ -166,8 +166,46 @@
                                         <i class="fa-regular fa-user"></i>7
                                     </div>
                                 </div>
-                            </div>
+                        </a>
                         {% endfor %}
+
+
+                        {% comment %} {% for course  in courses %}
+                            <div class="card swiper-slide">
+                                <div class="cardPreview">
+                                    <img src="{{course.image.url}}" alt="">
+                                    <div class="cardStatus yoga">{{course.category.name}}</div>
+                                </div>
+
+                                <div class="cardHead">
+                                    <div class="cardUser">
+                                        <div class="cardAvatar">
+                                            <img src="{{course.trainer.image.url}}" alt="">
+                                        </div>
+                                        <div class="cardDetails">
+                                            <div class="cardTitle">7-days barre body</div>
+                                            <div class="cardTrainer">
+                                                <span class="fullname">{{course.trainer.fullname}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cardLevel {{course.level|lower}}">{{course.level}}</div>
+                                </div>
+
+                                <div class="cardParameters">
+                                    <div class="cardParameter">
+                                        <i class="fa-brands fa-youtube"></i>160
+                                    </div>
+                                    <div class="cardParameter">
+                                        <i class="fa-regular fa-user"></i>7
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %} {% endcomment %}
+
+
+                            
+                            
 
                     </div>  
                     

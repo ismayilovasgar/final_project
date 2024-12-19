@@ -20,8 +20,8 @@
 .mydrop {
   position: absolute;
   top: -20px;
-  width: 48px;
-  height: 48px;
+  width: 28px;
+  height: 28px;
   pointer-events: none;
   animation: fall linear infinite;
   object-fit: contain;

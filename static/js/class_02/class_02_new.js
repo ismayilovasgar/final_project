@@ -9,6 +9,15 @@ let swiper_programs2 = new Swiper(".programs_swiper", {
     type: "fraction",
     clickable: true,
   },
+
+  loop: true, // Slider'ın döngüsel olmasını sağlar
+  autoplay: {
+    delay: 3000, // 3 saniyede bir kaydırır
+    disableOnInteraction: false, // Kullanıcı etkileşimi olsa da otomatik kaydırma devam eder
+  },
+  speed: 800, // Hareketin hızını ayarlar (ms cinsinden). 800 ms daha yavaş, daha yumuşak geçiş sağlar
+  easing: "ease-in-out", // Yumuşak geçiş efekti ekler (diğer seçenekler: ease, ease-out vb.)
+
   navigation: {
     nextEl: ".programs_next_btn",
     prevEl: ".programs_prev_btn",

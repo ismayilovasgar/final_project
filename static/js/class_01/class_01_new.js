@@ -288,6 +288,13 @@ var swiper = new Swiper(".testimonials-swiper", {
     // nextEl: ".myswiper-button-next",
     // prevEl: ".myswiper-button-prev",
   },
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  easing: "ease-in-out",
 
   breakpoints: {
     375: {

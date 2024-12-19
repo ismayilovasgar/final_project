@@ -395,4 +395,5 @@ var swiper = new Swiper(".swiper_content_navbar", {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+  
 });

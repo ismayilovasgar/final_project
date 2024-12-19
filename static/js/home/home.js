@@ -9,6 +9,13 @@ var swiper = new Swiper(".clients_swiper", {
     el: ".swiper-pagination",
     type: "fraction",
   },
+  loop: true, // Slider'ın döngüsel olmasını sağlar
+  autoplay: {
+    delay: 2500, // 2.5 saniyede bir kaydırır
+    disableOnInteraction: false, // Kullanıcı etkileşimi olsa da otomatik kaydırma devam eder
+  },
+  speed: 800, // Hareketin hızını ayarlar (ms cinsinden). 800 ms daha yavaş, daha yumuşak geçiş sağlar
+  easing: "ease-in-out", // Yumuşak geçiş efekti ekler (diğer seçenekler: ease, ease-out vb.)
 
   breakpoints: {
     0: {
@@ -39,6 +46,13 @@ var swiper = new Swiper(".review-swiper-content", {
     nextEl: ".previoustBtn",
     prevEl: ".nextBtn",
   },
+  speed: 800,
+  loop: true, // Slider'ın döngüsel olmasını sağlar
+  autoplay: {
+    delay: 2500, // 2.5 saniyede bir kaydırır
+    disableOnInteraction: false, // Kullanıcı etkileşimi olsa da otomatik kaydırma devam eder
+  },
+  easing: "ease-in-out", // Yumuşak geçiş efekti ekler (diğer seçenekler: ease, ease-out vb.)
 });
 
 // Filter Select
@@ -205,6 +219,14 @@ var swiper = new Swiper(".swiper_content_advantageslist", {
     el: ".swiper-pagination",
     clickable: true,
   },
+  loop: true, // Slider'ın döngüsel olmasını sağlar
+  autoplay: {
+    delay: 3000, // 3 saniyede bir kaydırır
+    disableOnInteraction: false, // Kullanıcı etkileşimi olsa da otomatik kaydırma devam eder
+  },
+  speed: 800, // Hareketin hızını ayarlar (ms cinsinden). 800 ms daha yavaş, daha yumuşak geçiş sağlar
+  easing: "ease-in-out", // Yumuşak geçiş efekti ekler (diğer seçenekler: ease, ease-out vb.)
+  // Sayfalama ve navigasyon eklemek için
   breakpoints: {
     0: {
       slidesPerView: 1,

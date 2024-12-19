@@ -8,6 +8,13 @@ let swiper_programs = new Swiper(".programs_swiper", {
     type: "fraction",
     clickable: true,
   },
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  easing: "ease-in-out",
   navigation: {
     nextEl: ".programs_next_btn",
     prevEl: ".programs_prev_btn",

@@ -10,6 +10,13 @@ var swiper = new Swiper(".clients_swiper", {
     el: ".swiper-pagination",
     type: "fraction",
   },
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  easing: "ease-in-out",
 
   breakpoints: {
     0: {
@@ -40,6 +47,13 @@ var swiper = new Swiper(".review-swiper-content", {
     nextEl: ".previoustBtn",
     prevEl: ".nextBtn",
   },
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  easing: "ease-in-out",
 });
 
 // ? advantages list
@@ -50,6 +64,13 @@ var swiper = new Swiper(".swiper_content_advantageslist", {
     el: ".swiper-pagination",
     clickable: true,
   },
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  easing: "ease-in-out",
   breakpoints: {
     0: {
       slidesPerView: 1,

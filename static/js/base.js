@@ -133,7 +133,7 @@ function startSnowing() {
   snowInterval = setInterval(createDrop, 500); // Her 500 millisaniyede bir kar tanesi yarat
   console.log("Kar yağışı başladı");
 
-  // Kar yağışını 7 saniye sonra durdur
+  // Kar yağışını 12 saniye sonra durdur
   snowTimeout = setTimeout(() => {
     stopSnowing();
   }, 12000);

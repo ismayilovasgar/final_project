@@ -200,7 +200,7 @@ function fillCardToContainer(data, len) {
                         <img src="${item.trainer_image}" alt="">
                     </div>
                     <div class="cardDetails">
-                        <div class="cardTitle">${item.course_description}</div>
+                        <div class="cardTitle">${item.course_name}</div>
                         <div class="cardTrainer">
                             <span class="firstName">${item.trainer_fullname} </span>
                         </div>

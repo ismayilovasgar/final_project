@@ -192,7 +192,7 @@ function fillCardToContainer(data, len) {
       // course_name uzunluğunu kontrol et
       let courseName = item.course_name;
       if (courseName.length > 16) {
-        courseName = courseName.substring(0, 16) + "..."; // 12 karakterden uzun olan metni kısalt
+        courseName = courseName.substring(0, 15) + "..."; // 12 karakterden uzun olan metni kısalt
       }
 
       content += `

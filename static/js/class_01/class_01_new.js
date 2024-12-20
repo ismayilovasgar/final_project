@@ -180,13 +180,22 @@ async function fetchPostByText(search_text) {
 function fillCardToContainer(data, len) {
   oldest_status = true;
   newest_status = false;
-  console.log(data);
+  // console.log(data);
+
   if (len > 0) {
     cardsContainer.style.height = "auto";
     cardsContainer.style.padding = "40px 0px 0px 0px";
     cardsContainer.innerHTML = "";
+    let content = "";
+
     data.map((item) => {
-      cardsContainer.innerHTML += `
+      // course_name uzunluğunu kontrol et
+      let courseName = item.course_name;
+      if (courseName.length > 16) {
+        courseName = courseName.substring(0, 16) + "..."; // 12 karakterden uzun olan metni kısalt
+      }
+
+      content += `
     <a class="card" href="/programs/detail/${item.course_id}/">
     <div class="">
             <div class="cardPreview">
@@ -200,7 +209,7 @@ function fillCardToContainer(data, len) {
                         <img src="${item.trainer_image}" alt="">
                     </div>
                     <div class="cardDetails">
-                        <div class="cardTitle">${item.course_name}</div>
+                        <div class="cardTitle">${courseName}</div>
                         <div class="cardTrainer">
                             <span class="firstName">${item.trainer_fullname} </span>
                         </div>
@@ -223,6 +232,8 @@ function fillCardToContainer(data, len) {
       </a>
     `;
     });
+
+    cardsContainer.innerHTML = content;
   } else {
     cardsContainer.innerHTML = "";
     localStorage.setItem("displayMessage", "true");

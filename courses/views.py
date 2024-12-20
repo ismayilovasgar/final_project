@@ -167,7 +167,7 @@ def format_data_bytags(request, data):
 
 
 def format_data(request, data):
-    max_description_length = 18
+    max_description_length = 12
     trainer_data = [
         {
             # key : value
